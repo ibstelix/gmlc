@@ -119,7 +119,7 @@ public abstract class MobileCoreNetworkInterfaceSbb implements Sbb {
     /**
      * For debugging - fake location data
      */
-    private boolean useFakeLocation = true;
+    private boolean useFakeLocation = false;
     private MLPResponse.MLPResultType fakeLocationType = MLPResponse.MLPResultType.OK;
     private String fakeLocationAdditionalInfoErrorString = "Internal positioning failure occurred";
     private int fakeCellId = 300;
@@ -258,7 +258,7 @@ public abstract class MobileCoreNetworkInterfaceSbb implements Sbb {
 			SubscriberInfo si = event.getSubscriberInfo();
 			CellGlobalIdOrServiceAreaIdOrLAI cellGlobalIdOrServiceAreaIdOrLAI = si.getLocationInformation()
 					.getCellGlobalIdOrServiceAreaIdOrLAI();
-            this.responseCellId = cellGlobalIdOrServiceAreaIdOrLAI.getCellGlobalIdOrServiceAreaIdFixedLength().getCellId();
+            this.responseCellId = cellGlobalIdOrServiceAreaIdOrLAI.getCellGlobalIdOrServiceAreaIdFixedLength().getCellIdOrServiceAreaCode();
 			SubscriberState ss = si.getSubscriberState();
 
             // Handle successfully having retried the device's cell-id
@@ -347,6 +347,7 @@ public abstract class MobileCoreNetworkInterfaceSbb implements Sbb {
     private void getSingleMSISDNLocation() {
         if (!useFakeLocation) {
             try {
+                this.logger.severe("===== NOT USING FAKE LOCATION ====" );
                 MAPDialogMobility mapDialogMobility = this.mapProvider.getMAPServiceMobility().createNewDialog(
                         this.getSRIMAPApplicationContext(), this.getServiceCenterSccpAddress(), null,
                         convertAddressFieldToSCCPAddress(this.requestingMSISDN), null);
@@ -375,6 +376,7 @@ public abstract class MobileCoreNetworkInterfaceSbb implements Sbb {
         }
         else {
             // Handle fake success
+            this.logger.severe("===== USING FAKE LOCATION ====" );
             if (this.fakeLocationType == MLPResponse.MLPResultType.OK) {
                 this.responseCellId = this.fakeCellId;
                 this.handleLocationResponse(this.fakeLocationType, null);

@@ -95,6 +95,7 @@
 	<!-- ==================================================================== -->
 	<bean name="TcapStack" class="org.mobicents.protocols.ss7.tcap.TCAPStackImpl">
 		<constructor>
+			<parameter>TcapStack</parameter>
 			<parameter>
 				<inject bean="SccpStack" property="sccpProvider" />
 			</parameter>
@@ -110,6 +111,7 @@
 	<!-- ==================================================================== -->
 	<bean name="MapStack" class="org.mobicents.protocols.ss7.map.MAPStackImpl">
 		<constructor>
+			<parameter>MapStack</parameter>
 			<parameter>
 				<inject bean="TcapStack" property="provider" />
 			</parameter>
