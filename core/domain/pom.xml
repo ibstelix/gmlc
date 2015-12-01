@@ -85,7 +85,11 @@
 						<addMavenDescriptor>false</addMavenDescriptor>
 					</archive>
 				  <excludes>
+<<<<<<< HEAD
 					<exclude>**/shell-transport-2.2.0-SNAPSHOT.jar</exclude>
+=======
+					<exclude>**/shell-transport-2.1.0.FINAL.jar</exclude>
+>>>>>>> refs/remotes/origin/mlp
 				  </excludes>
 				</configuration>
 			</plugin>

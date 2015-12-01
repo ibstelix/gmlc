@@ -112,6 +112,7 @@
         </property>
     </bean>
 
+<<<<<<< HEAD
     <!-- ==================================================================== -->
     <!-- TCAP Service -->
     <!-- ==================================================================== -->
@@ -129,7 +130,25 @@
         <property name="maxDialogs">25000</property >
         -->
     </bean>
+=======
+	<!-- ==================================================================== -->
+	<!-- TCAP Service -->
+	<!-- ==================================================================== -->
+	<bean name="TcapStack" class="org.mobicents.protocols.ss7.tcap.TCAPStackImpl">
+		<constructor>
+			<parameter>TcapStack</parameter>
+			<parameter>
+				<inject bean="SccpStack" property="sccpProvider" />
+			</parameter>
+			<parameter>8</parameter>
+		</constructor>
+		<property name="dialogIdleTimeout">60000</property>
+		<property name="invokeTimeout">30000</property>
+		<property name="maxDialogs">25000</property>
+	</bean>
+>>>>>>> refs/remotes/origin/mlp
 
+<<<<<<< HEAD
     <!-- ==================================================================== -->
     <!-- MAP Service -->
     <!-- ==================================================================== -->
@@ -141,6 +160,19 @@
             </parameter>
         </constructor>
     </bean>
+=======
+	<!-- ==================================================================== -->
+	<!-- MAP Service -->
+	<!-- ==================================================================== -->
+	<bean name="MapStack" class="org.mobicents.protocols.ss7.map.MAPStackImpl">
+		<constructor>
+			<parameter>MapStack</parameter>
+			<parameter>
+				<inject bean="TcapStack" property="provider" />
+			</parameter>
+		</constructor>
+	</bean>
+>>>>>>> refs/remotes/origin/mlp
 
     <!-- ==================================================================== -->
     <!-- Shell Service -->
@@ -188,9 +220,18 @@
         <property name="persistDir">${jboss.server.data.dir}/GMLC</property>
     </bean>
 
+<<<<<<< HEAD
     <bean name="GmlcShellExecutor" class="org.mobicents.gmlc.GmlcShellExecutor">
         <property name="gmlcManagement">
             <inject bean="GmlcManagement" />
         </property>
     </bean> 
 </deployment>
+=======
+	<bean name="GmlcShellExecutor" class="org.mobicents.gmlc.GmlcShellExecutor">
+		<property name="gmlcManagement">
+			<inject bean="GmlcManagement" />
+		</property>
+	</bean>	
+</deployment>
+>>>>>>> refs/remotes/origin/mlp
